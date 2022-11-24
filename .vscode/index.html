@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    *{
+        background-color: black;
+        color: white;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+    }
+
+    #container > div {
+      border: 2px solid red;
+      border-radius: 5px;
+      width: 50%;
+      height: 300px;
+      overflow-y: auto;
+    }
+    #container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <h1>WELCOME TO => SGWJS    THANKS FOR WATCHING VIDEO AND LIKE COMMENT AND SHARE  THANKS AGAIN </h1>
+
+    <!-- take container to store all and display  -->
+
+    <div id="container"></div>
+  </body>
+</html>
+
+<script>
+  const showdata = async () => {
+    // take api call here
+    let data = await fetch("https://fakestoreapi.com/products");
+
+    let collectdata = await data.json();
+
+    let arr = collectdata;
+
+    console.log(arr);
+
+    // using here forEach and iterate all data
+
+    arr.forEach((el) => {
+      let div = document.createElement("div");
+      let img = document.createElement("img");
+      img.src = el.image;
+      let des = document.createElement("p");
+      des.innerText = el.description;
+
+      let price = document.createElement("p");
+
+      price.innerText = el.price;
+
+      div.append(img, des, price); // store all data to call the api
+
+      document.getElementById("container").append(div);
+    });
+  };
+  showdata(); // call the function over here
+</script>
